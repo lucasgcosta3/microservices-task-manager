@@ -7,7 +7,7 @@ public record UserResponse(
         String name,
         String email,
         String password,
-        boolean status,
+        Boolean status,
         LocalDateTime createdAt
 ){
 }
