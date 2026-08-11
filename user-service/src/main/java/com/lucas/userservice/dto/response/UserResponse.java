@@ -2,7 +2,7 @@ package com.lucas.userservice.dto.response;
 
 import java.time.LocalDateTime;
 
-public record UserResponseDTO (
+public record UserResponse(
         Long id,
         String name,
         String email,
