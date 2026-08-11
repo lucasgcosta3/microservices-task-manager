@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Boolean active;
+    private Boolean active = true;
 
     private LocalDateTime createdAt;
 
@@ -38,9 +38,6 @@ public class User {
     public void prePersist() {
         if (this.createdAt == null) {
             this.createdAt = LocalDateTime.now();
-        }
-        if (this.active == null) {
-            this.active = true;
         }
     }
 }
