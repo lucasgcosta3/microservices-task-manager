@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -29,13 +30,17 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private boolean active;
+    private Boolean active;
 
     private LocalDateTime createdAt;
 
     @PrePersist
     public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        this.active = true;
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+        if (this.active == null) {
+            this.active = true;
+        }
     }
 }
