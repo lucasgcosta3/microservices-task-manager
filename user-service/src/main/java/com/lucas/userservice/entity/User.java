@@ -36,5 +36,6 @@ public class User {
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
+        this.active = true;
     }
 }
