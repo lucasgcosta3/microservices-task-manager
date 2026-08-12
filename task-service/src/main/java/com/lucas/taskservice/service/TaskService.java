@@ -26,10 +26,7 @@ public class TaskService {
         return taskMapper.toTaskResponse(saved);
     }
 
-    public List<TaskResponse> findAll() {
-        var tasks = taskRepository.findAll();
-        return taskMapper.toTaskResponse(tasks);
-    }
+
 
     public TaskResponse findById(String id) {
         var task = findTaskById(id);
