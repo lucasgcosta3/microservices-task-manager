@@ -27,12 +27,6 @@ public class TaskController {
         return ResponseEntity.created(uri).body(task);
     }
 
-    @GetMapping
-    public ResponseEntity<List<TaskResponse>> findAll() {
-        var tasks = taskService.findAll();
-        return ResponseEntity.ok(tasks);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<TaskResponse> findById(@PathVariable String id) {
         var task = taskService.findById(id);
