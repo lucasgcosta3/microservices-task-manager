@@ -1,7 +1,6 @@
 package com.lucas.taskservice.service;
 
 import com.lucas.taskservice.client.UserClient;
-import com.lucas.taskservice.client.dto.UserResponse;
 import com.lucas.taskservice.dto.request.TaskRequest;
 import com.lucas.taskservice.dto.request.UpdateTaskStatusRequest;
 import com.lucas.taskservice.dto.response.TaskResponse;
