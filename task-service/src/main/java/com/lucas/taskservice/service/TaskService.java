@@ -1,5 +1,7 @@
 package com.lucas.taskservice.service;
 
+import com.lucas.taskservice.client.UserClient;
+import com.lucas.taskservice.client.dto.UserResponse;
 import com.lucas.taskservice.dto.request.TaskRequest;
 import com.lucas.taskservice.dto.request.UpdateTaskStatusRequest;
 import com.lucas.taskservice.dto.response.TaskResponse;
@@ -8,6 +10,7 @@ import com.lucas.taskservice.entity.TaskStatus;
 import com.lucas.taskservice.exception.TaskNotFoundException;
 import com.lucas.taskservice.mapper.TaskMapper;
 import com.lucas.taskservice.repository.TaskRepository;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +19,26 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TaskService {
+
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final UserClient userClient;
 
     public TaskResponse create(TaskRequest request) {
+
+        try {
+            userClient.findById(request.userId());
+        } catch (FeignException.NotFound e) {
+            throw new TaskNotFoundException("User not found with id: " + request.userId());
+        } catch (FeignException e) {
+            throw new IllegalStateException("Unable to reach user-service to validate userId: " + request.userId(), e);
+        }
+
         var task = taskMapper.toEntity(request);
         var saved = taskRepository.save(task);
 
         return taskMapper.toTaskResponse(saved);
     }
-
-
 
     public TaskResponse findById(String id) {
         var task = findTaskById(id);
