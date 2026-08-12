@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> create(@Valid @RequestBody UserRequest request) {
         var user = userService.create(request);
-        var uri = URI.create("/api/users" + user.id());
+        var uri = URI.create("/api/users/" + user.id());
 
         return ResponseEntity.created(uri).body(user);
     }
@@ -39,7 +39,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
-        var user = userService.update(request);
+        var user = userService.update(id, request);
         return ResponseEntity.ok(user);
     }
 

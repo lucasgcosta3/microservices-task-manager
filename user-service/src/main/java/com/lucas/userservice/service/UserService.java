@@ -34,8 +34,8 @@ public class UserService {
         return userMapper.toUserResponse(user);
     }
 
-    public UserResponse update(UserRequest request) {
-        var user = userMapper.toEntity(request);
+    public UserResponse update(Long id, UserRequest request) {
+        var user = findUserById(id);
 
         user.setName(request.name());
         user.setEmail(request.email());

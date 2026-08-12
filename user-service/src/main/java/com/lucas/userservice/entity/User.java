@@ -30,6 +30,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean active = true;
 
     private LocalDateTime createdAt;
