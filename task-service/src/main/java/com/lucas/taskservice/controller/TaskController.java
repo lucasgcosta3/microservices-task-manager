@@ -22,7 +22,7 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskResponse> create(@Valid @RequestBody TaskRequest request) {
         var task = taskService.create(request);
-        var uri = URI.create("/api/tasks" + task.id());
+        var uri = URI.create("/api/tasks/" + task.id());
 
         return ResponseEntity.created(uri).body(task);
     }
