@@ -61,6 +61,12 @@ public class TaskService {
 
         task.setStatus(request.status());
 
+        if (request.status() == TaskStatus.COMPLETED) {
+            task.setCompletedAt(LocalDateTime.now());
+        } else {
+            task.setCompletedAt(null);
+        }
+
         var saved = taskRepository.save(task);
         return taskMapper.toTaskResponse(saved);
     }
