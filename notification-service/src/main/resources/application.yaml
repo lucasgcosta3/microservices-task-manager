@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: notification-service
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: SEU_USERNAME_MAILTRAP
+    password: SUA_PASSWORD_MAILTRAP
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+application:
+  mail:
+    from-email: no-reply@taskmanager.com

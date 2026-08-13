@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Tarefa Criada</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .title { color: #2c3e50; }
+        .badge { background: #3498db; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Olá, <span th:text="${recipientName}">Usuário</span>! 👋</h2>
+    <p>Uma nova tarefa foi atribuída a você no sistema:</p>
+
+    <h3 class="title" th:text="${taskTitle}">Título da Tarefa</h3>
+    <p th:text="${taskDescription}">Descrição detalhada da tarefa...</p>
+
+    <p><span class="badge">Status: PENDING</span></p>
+    <hr>
+    <small>Este é um e-mail automático enviado pelo Task Manager System.</small>
+</div>
+</body>
+</html>
