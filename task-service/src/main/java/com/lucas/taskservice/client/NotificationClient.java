@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "notification-service", url = "${application.config.notification-service-url}")
 public interface NotificationClient {
 
-    @PostMapping("/api/notifications/task-created")
-    void sendTaskCreatedNotification(@RequestBody TaskNotificationRequest request);
+    @PostMapping("/api/notifications/email")
+    void sendNotification(@RequestBody TaskNotificationRequest request);
 }
