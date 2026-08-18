@@ -2,14 +2,11 @@ server:
   port: 8082
 
 spring:
-  application:
-    name: notification-service
-
   mail:
-    host: sandbox.smtp.mailtrap.io
-    port: 2525
-    username: SEU_USERNAME_MAILTRAP
-    password: SUA_PASSWORD_MAILTRAP
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
     properties:
       mail:
         smtp:
@@ -19,4 +16,4 @@ spring:
 
 application:
   mail:
-    from-email: no-reply@taskmanager.com
+    from-email:
