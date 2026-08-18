@@ -14,7 +14,7 @@ public class NotificationController {
 
     private final EmailService emailService;
 
-    @PostMapping("/task-created")
+    @PostMapping("/email")
     public ResponseEntity<Void> notifyTaskCreated(@Valid @RequestBody TaskNotificationRequest request) {
         emailService.sendTaskCreatedEmail(request);
         return ResponseEntity.accepted().build(); // 202 Accepted indica que o processo de notificação foi acionado
