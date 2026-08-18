@@ -1,6 +1,8 @@
 package com.lucas.taskservice.service;
 
+import com.lucas.taskservice.client.NotificationClient;
 import com.lucas.taskservice.client.UserClient;
+import com.lucas.taskservice.client.dto.TaskNotificationRequest;
 import com.lucas.taskservice.dto.request.TaskRequest;
 import com.lucas.taskservice.dto.request.UpdateTaskStatusRequest;
 import com.lucas.taskservice.dto.response.TaskResponse;
@@ -13,6 +15,7 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +25,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
     private final UserClient userClient;
+    private final NotificationClient notificationClient;
 
     public TaskResponse create(TaskRequest request) {
 
@@ -68,6 +72,15 @@ public class TaskService {
         var task = findTaskById(id);
 
         task.setStatus(request.status());
+        task.setCompletedAt(LocalDateTime.now());
+        var user = userClient.findById(task.getUserId());
+
+        var notification = new TaskNotificationRequest(
+                user.email(),
+                user.name(),
+                task.getTitle(),
+                task.getDescription());
+        notificationClient.sendNotification(notification);
 
         var saved = taskRepository.save(task);
         return taskMapper.toTaskResponse(saved);
