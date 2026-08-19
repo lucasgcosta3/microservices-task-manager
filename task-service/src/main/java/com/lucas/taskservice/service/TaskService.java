@@ -72,14 +72,17 @@ public class TaskService {
         var task = findTaskById(id);
 
         task.setStatus(request.status());
-        task.setCompletedAt(LocalDateTime.now());
+        if (task.getStatus().equals(TaskStatus.COMPLETED)) {
+            task.setCompletedAt(LocalDateTime.now());
+        }
         var user = userClient.findById(task.getUserId());
 
         var notification = new TaskNotificationRequest(
                 user.email(),
                 user.name(),
                 task.getTitle(),
-                task.getDescription());
+                task.getDescription(),
+                task.getStatus());
         notificationClient.sendNotification(notification);
 
         var saved = taskRepository.save(task);
