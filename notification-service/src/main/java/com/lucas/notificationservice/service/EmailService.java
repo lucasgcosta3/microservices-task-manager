@@ -28,6 +28,7 @@ public class EmailService {
             context.setVariable("recipientName", request.recipientName());
             context.setVariable("taskTitle", request.taskTitle());
             context.setVariable("taskDescription", request.taskDescription());
+            context.setVariable("taskStatus", request.taskStatus());
 
             // 2. Processa o HTML Thymeleaf transformando em uma String legível
             String htmlContent = templateEngine.process("task-created", context);

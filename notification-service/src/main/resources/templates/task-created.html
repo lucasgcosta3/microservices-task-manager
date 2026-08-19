@@ -118,7 +118,7 @@
             <div class="task-title-label">Título da Tarefa</div>
             <h2 class="task-title" th:text="${taskTitle}">Nome da Tarefa</h2>
 
-            <span class="status-badge">Concluída</span>
+            <span class="status-badge" th:text="${taskStatus}">Status</span>
 
             <!-- Exibe a descrição apenas se ela existir -->
             <div th:if="${taskDescription != null and !taskDescription.isBlank()}" style="margin-top: 12px;">
