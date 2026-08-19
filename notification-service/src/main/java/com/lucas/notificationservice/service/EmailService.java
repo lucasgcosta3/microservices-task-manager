@@ -28,13 +28,14 @@ public class EmailService {
             context.setVariable("recipientName", request.recipientName());
             context.setVariable("taskTitle", request.taskTitle());
             context.setVariable("taskDescription", request.taskDescription());
+            context.setVariable("taskStatus", request.taskStatus());
 
             // 2. Processa o HTML Thymeleaf transformando em uma String legível
             String htmlContent = templateEngine.process("task-created", context);
 
             // 3. Monta a mensagem de e-mail (MIME para suportar HTML)
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
 
             helper.setFrom(fromEmail);
             helper.setTo(request.recipientEmail());
